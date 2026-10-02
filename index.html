@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahebrao Stone | Quality Aggregates & Stone Crusher</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stone: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#090d16',
+                        },
+                        amber: {
+                            DEFAULT: '#F59E0B',
+                            light: '#FBBF24',
+                            dark: '#D97706',
+                            glow: 'rgba(245, 158, 11, 0.25)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-color: #0f172a;
+            background-image: radial-gradient(rgba(245, 158, 11, 0.12) 1px, transparent 0);
+            background-size: 28px 28px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber selection:text-slate-900 custom-scrollbar">
+
+    <!-- Top Announcement / Quick Contact Bar -->
+    <div class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 hidden lg:block">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-6">
+                <span><i class="fa-solid fa-location-dot text-amber mr-2"></i>Serving Major Highway & Infra Projects Nationwide</span>
+                <span><i class="fa-solid fa-clock text-amber mr-2"></i>Plant Hours: 24x7 Loading & Dispatch</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="https://wa.me/8010639449?text=Hello%20Sahebrao%20Stone,%20I%20have%20an%20inquiry." target="_blank" class="hover:text-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp text-emerald-500 mr-2"></i>+91 8010639449</a>
+                <a href="tel:+8010639449" class="hover:text-amber transition-colors"><i class="fa-solid fa-phone text-amber mr-2"></i>+91 8010639449</a>
+                <a href="mailto:sales@sahebraostone.in" class="hover:text-amber transition-colors"><i class="fa-solid fa-envelope text-amber mr-2"></i>sales@sahebraostone.in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <nav class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 shadow-xl transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-3 group shrink-0">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber rounded-xl flex items-center justify-center text-slate-950 text-xl sm:text-2xl font-black shadow-lg shadow-amber/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-mountain"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg sm:text-2xl font-extrabold tracking-tight text-white font-heading uppercase block leading-none">
+                            SAHEBRAO <span class="text-amber">STONE</span>
+                        </span>
+                        <span class="text-[9px] sm:text-[10px] tracking-widest text-slate-400 font-semibold uppercase block mt-1">Crusher & Aggregates</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden xl:flex items-center space-x-1 lg:space-x-2" id="navLinks">
+                    <a href="#home" class="px-3 py-2 text-sm font-medium text-slate-200 hover:text-amber hover:bg-slate-800/50 rounded-lg transition-colors">Home</a>
+                    <a href="#products" class="px-3 py-2 text-sm font-medium text-slate-200 hover:text-amber hover:bg-slate-800/50 rounded-lg transition-colors">Products</a>
+                    <a href="#why-us" class="px-3 py-2 text-sm font-medium text-slate-200 hover:text-amber hover:bg-slate-800/50 rounded-lg transition-colors">Why Choose Us</a>
+                    <a href="#facility" class="px-3 py-2 text-sm font-medium text-slate-200 hover:text-amber hover:bg-slate-800/50 rounded-lg transition-colors">Gallery</a>
+                    <a href="#contact" class="px-3 py-2 text-sm font-medium text-slate-200 hover:text-amber hover:bg-slate-800/50 rounded-lg transition-colors">Contact</a>
+                </div>
+
+                <!-- Action Buttons & Mobile Toggle -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <div class="hidden sm:flex items-center gap-2 lg:gap-3">
+                        <button onclick="openQuoteModal()" class="px-4 py-2.5 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-bold text-sm shadow-lg shadow-amber/20 hover:shadow-amber/40 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-file-invoice"></i> Get Quote
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 focus:outline-none border border-slate-700/50 transition-colors" aria-label="Toggle Navigation">
+                        <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div class="xl:hidden hidden border-b border-slate-800 bg-slate-900 px-4 pt-2 pb-6 space-y-2 shadow-2xl" id="mobileMenu">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Home</a>
+            <a href="#products" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Products</a>
+            <a href="#why-us" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Why Choose Us</a>
+            <a href="#facility" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Gallery</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Contact Us</a>
+            
+            <div class="pt-4 flex flex-col gap-2">
+                <button onclick="toggleMobileMenu(); openQuoteModal()" class="w-full text-center py-3 rounded-xl bg-amber text-slate-950 font-bold text-base shadow-lg hover:bg-amber-light transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-invoice"></i> Get Instant Quote
+                </button>
+                <a href="https://wa.me/8010639449?text=Hello%20Sahebrao%20Stone,%20I%20am%20interested%20in%20a%20quotation." target="_blank" class="w-full text-center py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Us (+91 8010639449)
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative hero-pattern text-white pt-10 pb-16 lg:pt-20 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex justify-center">
+            
+            <div class="max-w-4xl text-center space-y-5 sm:space-y-6 flex flex-col items-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/90 border border-amber/30 text-amber text-xs font-semibold tracking-wide uppercase">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    ISO Certified High-Grade Aggregates
+                </div>
+                
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-white tracking-tight leading-[1.15]">
+                    Quality Aggregates. <br class="hidden sm:inline"/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber via-amber-light to-yellow-200">Unmatched Reliability.</span><br/>
+                    Built for Infrastructure.
+                </h1>
+
+                <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed font-normal">
+                    Premier manufacturer and bulk supplier of high-grade crushed stone, aggregate, M-Sand, GSB, and WMM for road highways, high-rises, bridge construction, and commercial developments.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
+                    <button onclick="openQuoteModal()" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-amber/20 hover:shadow-amber/40 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-invoice text-base sm:text-lg"></i> Get Instant Quote
+                    </button>
+                    <a href="https://wa.me/8010639449?text=Hello%20Sahebrao%20Stone,%20I%20want%20to%20inquire%20about%20material%20rates." target="_blank" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-900/30 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i> WhatsApp Us
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 sm:py-20 bg-slate-100 text-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-50 rounded-full border border-amber-200 inline-block mb-3">High Performance Aggregates</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Our Premium Product Line</h2>
+                <p class="text-slate-600 mt-3 text-sm sm:text-base">Engineered, double-washed, and precision-graded stone products manufactured to exceed Indian Standard (IS) specifications for structural and infrastructure works.</p>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                
+                <!-- Crushand -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                        <img src="./imgs/crushed.webp" alt="Crushand" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-amber-600/40 mix-blend-multiply z-10"></div>
+                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                        <div class="z-20 p-6 pt-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">Crushand</h3>
+                            <p class="text-slate-200 text-xs mt-1">Particle Size: 0mm to 4.75mm</p>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            High-quality VSI crushed cubical manufactured sand, double-washed to eliminate silt content for superior workability, high bonding strength, and flawless mortar plastering.
+                        </p>
+                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Primary Application:</span>
+                                <span class="font-bold text-slate-900 text-right">RCC Concrete, Plastering</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Silt Content:</span>
+                                <span class="font-bold text-slate-900">&lt; 3% (IS 383)</span>
+                            </div>
+                        </div>
+                        <button onclick="openProductDetail('msand')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 6 MM -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                        <img src="./imgs/6mm.webp" alt="6 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                        <div class="z-20 p-6 pt-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">6 MM</h3>
+                            <p class="text-slate-200 text-xs mt-1">Sieve Range: 6mm to 10mm</p>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Precision-graded fine aggregate with an exceptional shape index, ideal for dense reinforced concrete, precast elements, roofing, and asphalt surface overlays.
+                        </p>
+                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Primary Application:</span>
+                                <span class="font-bold text-slate-900 text-right">RCC Slab, Precast Works</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Crushing Value:</span>
+                                <span class="font-bold text-slate-900">&lt; 18%</span>
+                            </div>
+                        </div>
+                        <button onclick="openProductDetail('10mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 10 MM -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                        <img src="./imgs/10mm.webp" alt="10 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                        <div class="z-20 p-6 pt-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">10 MM</h3>
+                            <p class="text-slate-200 text-xs mt-1">Sieve Range: 10mm to 20mm</p>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            High-strength standard core aggregate widely used for heavy RCC structures, columns, beams, foundation footings, and robust bridge pier construction.
+                        </p>
+                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Primary Application:</span>
+                                <span class="font-bold text-slate-900 text-right">Beams, Columns, Footings</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Specific Gravity:</span>
+                                <span class="font-bold text-slate-900">2.65 - 2.75</span>
+                            </div>
+                        </div>
+                        <button onclick="openProductDetail('20mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 20 MM -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                        <img src="./imgs/20mm.webp" alt="20 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                        <div class="z-20 p-6 pt-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">20 MM</h3>
+                            <p class="text-slate-200 text-xs mt-1">Sieve Range: 20mm to 40mm</p>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Coarse heavy-duty angular stone aggregate designed for mass concrete foundations, road sub-base preparation, railway ballast, and heavy industrial flooring.
+                        </p>
+                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Primary Application:</span>
+                                <span class="font-bold text-slate-900 text-right">Mass Concrete, Base Course</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Flakiness Index:</span>
+                                <span class="font-bold text-slate-900">&lt; 15%</span>
+                            </div>
+                        </div>
+                        <button onclick="openProductDetail('40mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 40 MM -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                        <img src="./imgs/40mm.webp" alt="40 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                        <div class="z-20 p-6 pt-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">40 MM</h3>
+                            <p class="text-slate-200 text-xs mt-1">Premixed Aggregate Base Course</p>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Dense graded crushed aggregate engineered for road base construction, providing high load-bearing capacity and rapid highway pavement stabilization.
+                        </p>
+                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Primary Application:</span>
+                                <span class="font-bold text-slate-900 text-right">National Highways</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Compaction Efficiency:</span>
+                                <span class="font-bold text-slate-900">98% MDD</span>
+                            </div>
+                        </div>
+                        <button onclick="openProductDetail('wmm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 60 MM -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                        <img src="./imgs/60mm.webp" alt="60 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+                        <div class="z-20 p-6 pt-0">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">60 MM</h3>
+                            <p class="text-slate-200 text-xs mt-1">Size: 150mm to 300mm+</p>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Heavy-duty coarse aggregate and hard basalt stones designed for heavy fill applications, retaining walls, riverbank protection, and robust slope stabilization.
+                        </p>
+                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Primary Application:</span>
+                                <span class="font-bold text-slate-900 text-right">Retaining Walls, Riprap</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 font-medium">Specific Gravity:</span>
+                                <span class="font-bold text-slate-900">2.70</span>
+                            </div>
+                        </div>
+                        <button onclick="openProductDetail('boulders')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="py-16 sm:py-20 bg-slate-50 text-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-100/80 rounded-full border border-amber-200 inline-block mb-3">Uncompromising Standard</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Why Sahebrao Stone is the Preferred Choice</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">Precision Crushing Tech</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        Equipped with high-capacity VSI (Vertical Shaft Impactor) and Jaw crushers ensuring uniform cubical shape and superior bonding in concrete mixes.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
+                        <i class="fa-solid fa-vial-circle-check"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">NABL Aligned Lab Testing</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        Every batch undergoes strict sieve analysis, flakiness index, elongation, and aggregate impact value (AIV) testing before dispatch.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4 md:col-span-2 lg:col-span-1">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
+                        <i class="fa-solid fa-truck-moving"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">Dedicated Tipper Fleet</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        In-house logistics fleet of 10-wheeler and 14-wheeler tippers integrated with GPS tracking to guarantee zero project downtime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facility & Gallery Section -->
+    <section id="facility" class="py-16 sm:py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
+                <div>
+                    <span class="text-amber font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber/10 rounded-full border border-amber/30 inline-block mb-3">Our Operations</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-white">Quarry & Plant Facility Gallery</h2>
+                    <p class="text-slate-400 text-xs mt-2">Hover over any image to view its title, or click to open full details in a popup box.</p>
+                </div>
+                
+                <!-- Gallery Category Filter Tabs -->
+                <!-- <div class="flex flex-wrap gap-2" id="galleryFilters">
+                    <button onclick="filterGallery('all', event)" class="gallery-btn active px-3.5 py-2 rounded-xl text-xs font-bold bg-amber text-slate-950 transition-all">All Operations</button>
+                    <button onclick="filterGallery('plant', event)" class="gallery-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Crushing Plant</button>
+                    <button onclick="filterGallery('stockyard', event)" class="gallery-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Stockyards</button>
+                    <button onclick="filterGallery('fleet', event)" class="gallery-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Transport Fleet</button>
+                </div> -->
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+                
+                <div class="gallery-item plant bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                     onclick="openImageModal('./imgs/crushed.webp', 'Crushed', 'Crushing Plant', 'Heavy-duty 500 TPH Primary Jaw Crusher breaking large basalt rocks into primary sized boulders for secondary VSI processing.')">
+                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                        <img src="./imgs/crushed.webp" alt="Primary Jaw Crusher" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">Crushed</h3>
+                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                     onclick="openImageModal('./imgs/6mm.webp', '6 MM', 'Stockyard', 'High-capacity stockyard maintaining over 25,000 MT of double-washed 10mm aggregate ready for high-speed automated loading.')">
+                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                        <img src="./imgs/6mm.webp" alt="10mm Aggregate Stockpile" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                            <!-- <span class="text-amber text-[10px] uppercase font-bold tracking-widest mb-1">Stockyard</span> -->
+                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">6 MM</h3>
+                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item fleet bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                     onclick="openImageModal('./imgs/10mm.webp', '10 MM', 'Transport Fleet', 'Our fleet of 35+ heavy-duty 10-wheeler and 14-wheeler tipper trucks equipped with real-time GPS dispatch tracking.')">
+                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                        <img src="./imgs/10mm.webp" alt="Heavy Tipper Fleet" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                            <!-- <span class="text-amber text-[10px] uppercase font-bold tracking-widest mb-1">Transport Fleet</span> -->
+                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">10 MM</h3>
+                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item plant bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                     onclick="openImageModal('./imgs/20mm.webp', '20 MM', 'Crushing Plant', 'Vertical Shaft Impactor (VSI) system designed to produce aggregate with a flakiness index below 12% for concrete durability.')">
+                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                        <img src="./imgs/20mm.webp" alt="VSI Cubical Crusher" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                            <!-- <span class="text-amber text-[10px] uppercase font-bold tracking-widest mb-1">Crushing Plant</span> -->
+                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">20 MM</h3>
+                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                     onclick="openImageModal('./imgs/40mm.webp', '40 MM', 'Stockyard', 'Hydro-sizer washing system ensuring micro-fine silt content is kept under 3% for superior plastering and concrete work.')">
+                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                        <img src="./imgs/40mm.webp" alt="M-Sand Washing Station" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                            <!-- <span class="text-amber text-[10px] uppercase font-bold tracking-widest mb-1">Stockyard</span> -->
+                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">40 MM</h3>
+                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                     onclick="openImageModal('./imgs/60mm.webp', '60 MM', 'Stockyard', 'Clean 6mm crushed aggregate stored under dry covered bays for precise asphalt and RCC batching.')">
+                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                        <img src="./imgs/60mm.webp" alt="6mm Fine Aggregate Stock" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                            <!-- <span class="text-amber text-[10px] uppercase font-bold tracking-widest mb-1">Stockyard</span> -->
+                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">60 MM</h3>
+                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                     onclick="openImageModal('https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=1200&q=80', '20mm Coarse Aggregate Reserve', 'Stockyard', 'Large basalt stones graded 20mm-40mm specifically produced for railway track ballast and high-load foundation bases.')">
+                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                        <img src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=800&q=80" alt="20mm Coarse Aggregate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                            <span class="text-amber text-[10px] uppercase font-bold tracking-widest mb-1">Stockyard</span>
+                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">20mm Coarse Aggregate Reserve</h3>
+                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Bulk Enquiries & Quote Form Section -->
+    <section id="contact" class="py-16 sm:py-20 bg-slate-100 text-slate-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                
+                <div class="lg:col-span-5 space-y-6 sm:space-y-8">
+                    <div>
+                        <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-50 rounded-full border border-amber-200 inline-block mb-3">Bulk Quotations</span>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Let’s Power Your Next Project</h2>
+                        <p class="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed">
+                            Looking for reliable aggregate supply, custom gradation, or long-term contract rates? Get in touch directly with our plant dispatch team.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-amber-dark flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 font-bold text-sm sm:text-base">Crusher Plant Location</h4>
+                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Sahebrao Stone Udyog, Gat no 557, Lonikand, <br />Tal-Haveli, Dist-Pune - 4122161</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-emerald-600 flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 font-bold text-sm sm:text-base">WhatsApp Business</h4>
+                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5 space-y-1">
+                                    <a href="https://wa.me/8432328164?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 8432328164 
+                                    </a>
+                                    <a href="https://wa.me/9623296287?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 9623296287 
+                                    </a>
+                                    <a href="https://wa.me/8010639449?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 8010639449 
+                                    </a>
+                                    <a href="https://wa.me/9730157933?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 9730157933
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-amber-dark flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 font-bold text-sm sm:text-base">Sales & Dispatch Helpline</h4>
+                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5">+91 9623296287</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-white p-5 sm:p-8 rounded-3xl border border-slate-200 shadow-xl">
+                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-file-signature text-amber-dark"></i> Bulk Rate Requirement Form
+                    </h3>
+
+                    <form id="bulkEnquiryForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Your Name *</label>
+                                <input type="text" id="bulkName" required placeholder="e.g. Sahebrao Stone Crusher" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Contact Phone *</label>
+                                <input type="tel" id="bulkPhone" required placeholder="+91 1234567890" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Delivery Address / Project Location *</label>
+                            <input type="text" id="bulkLocation" required placeholder="Full site delivery address or landmark" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 sm:py-4 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-amber/20 hover:shadow-amber/40 transition-all">
+                            Submit Bulk Quotation Request
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 text-xs sm:text-sm border-t border-slate-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-3">
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                <a href="https://wa.me/8010639449" target="_blank" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-emerald-500"></i> WhatsApp: +91 8010639449
+                </a>
+                <a href="tel:+8010639449" class="hover:text-amber transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone text-amber"></i> Call: +91 8010639449
+                </a>
+            </div>
+            <div>
+                © <span id="currentYear"></span> Sahebrao Stone (sahebraostone.in). All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- POPUP LIGHTBOX MODAL FOR BIG IMAGE & DESCRIPTION -->
+    <div id="imageModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeImageModal(event)">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-3xl rounded-3xl overflow-hidden shadow-2xl relative text-white max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-slate-950/80 text-white hover:bg-amber hover:text-slate-950 flex items-center justify-center text-xl transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="relative bg-slate-950 overflow-hidden flex items-center justify-center max-h-[50vh] sm:max-h-[60vh]">
+                <img id="modalImg" src="" alt="Expanded View" class="w-full h-full object-contain max-h-[50vh] sm:max-h-[60vh] mx-auto">
+            </div>
+            <div class="p-5 sm:p-8 space-y-3 overflow-y-auto">
+                <span id="modalCategory" class="bg-amber/20 text-amber border border-amber/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block"></span>
+                <h3 id="modalTitle" class="text-xl sm:text-2xl font-extrabold font-heading text-white"></h3>
+                <p id="modalDescription" class="text-slate-300 text-xs sm:text-sm leading-relaxed"></p>
+                <div class="pt-2 flex justify-end">
+                    <button onclick="closeImageModal(); openQuoteModal()" class="px-5 py-2.5 bg-amber text-slate-950 font-bold rounded-xl text-xs hover:bg-amber-light transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice"></i> Inquire About This Material
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Spec Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative text-white space-y-5 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProductModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="productModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Quote Request Modal -->
+    <div id="quoteModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative text-white space-y-5 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuoteModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div>
+                <h3 class="text-xl sm:text-2xl font-extrabold font-heading text-white flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-amber"></i> Request Instant Quote
+                </h3>
+                <p class="text-slate-400 text-xs mt-1">Receive direct crusher rates directly on your phone or email.</p>
+            </div>
+
+            <div>
+                <p>Please call/whatsapp on below number.</p>
+                <hr /><br />
+                <ul>
+                    <li>+91 9623296287</li>
+                    <li>
+                        <a href="https://wa.me/8432328164?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 8432328164 
+                                    </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/9623296287?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 9623296287 
+                                    </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/8010639449?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 8010639449 
+                                    </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/8432328164?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                        +91 8432328164 
+                                    </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-5 right-5 z-50 bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-2xl font-bold text-xs sm:text-sm hidden flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-lg sm:text-xl"></i>
+        <span id="toastMsg">Inquiry Sent Successfully!</span>
+    </div>
+
+    <script>
+        // Product Specification Data Dictionary
+        const productSpecs = {
+            'msand': {
+                title: 'Crushand',
+                size: '0mm to 4.75mm',
+                density: '~1.6 Tonnes / Cu.m',
+                compliance: 'IS 383 Zone II Compliant',
+                uses: 'High-grade VSI manufactured sand with cubical particle shape, double-washed to ensure optimal silt content for reinforced concrete and smooth plastering works.'
+            },
+            '10mm': {
+                title: '6 MM',
+                size: '6mm to 10mm',
+                density: '~1.5 Tonnes / Cu.m',
+                compliance: 'IS 383 Compliant',
+                uses: 'Fine crushed stone chips with excellent shape index, ideal for dense reinforced concrete, precast items, roofing, and smooth asphalt paving layers.'
+            },
+            '20mm': {
+                title: '10 MM',
+                size: '10mm to 20mm',
+                density: '~1.55 Tonnes / Cu.m',
+                compliance: 'IS 383 Compliant',
+                uses: 'High-strength standard core aggregate widely used for heavy RCC structures, building columns, beams, foundation footings, and bridge piers.'
+            },
+            '40mm': {
+                title: '20 MM',
+                size: '20mm to 40mm',
+                density: '~1.6 Tonnes / Cu.m',
+                compliance: 'IS 383 Compliant',
+                uses: 'Coarse heavy-duty stone aggregate designed for mass concrete foundations, road sub-base preparation, railway ballast, and heavy industrial flooring.'
+            },
+            'wmm': {
+                title: '40 MM',
+                size: 'Premixed Base Course',
+                density: '~1.75 Tonnes / Cu.m',
+                compliance: 'MORT&H Specifications',
+                uses: 'Premium crushed aggregate designed for road sub-base courses, delivering exceptional load distribution and highway pavement stability.'
+            },
+            'boulders': {
+                title: '60 MM',
+                size: '150mm to 300mm+',
+                density: '~1.7 Tonnes / Cu.m',
+                compliance: 'IS Standard',
+                uses: 'Heavy-duty angular stone and hard basalt material designed for robust retaining walls, slope stabilization, and heavy fill engineering applications.'
+            }
+        };
+
+        // Master Application Initializer
+        function init() {
+            // Set dynamic current year in footer
+            const currentYearEl = document.getElementById('currentYear');
+            if (currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
+            }
+
+            // Keyboard shortcut setup (Esc key closes open modals)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeImageModal();
+                    closeProductModal();
+                    closeQuoteModal();
+                }
+            });
+
+            // Set up click-outside listeners for modal overlays
+            ['productModal', 'quoteModal'].forEach(modalId => {
+                const modalEl = document.getElementById(modalId);
+                if (modalEl) {
+                    modalEl.addEventListener('click', (e) => {
+                        if (e.target === modalEl) {
+                            modalEl.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+
+            // Active section scroll-spy navigation highlighting
+            const sections = document.querySelectorAll('section[id]');
+            const desktopNavLinks = document.querySelectorAll('#navLinks a[href^="#"]');
+
+            window.addEventListener('scroll', () => {
+                let currentId = '';
+                const scrollPos = window.scrollY + 120;
+
+                sections.forEach(section => {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        currentId = section.getAttribute('id');
+                    }
+                });
+
+                desktopNavLinks.forEach(link => {
+                    const href = link.getAttribute('href').replace('#', '');
+                    if (href === currentId) {
+                        link.classList.add('text-amber', 'font-bold');
+                        link.classList.remove('text-slate-200');
+                    } else {
+                        link.classList.remove('text-amber', 'font-bold');
+                        link.classList.add('text-slate-200');
+                    }
+                });
+            });
+        }
+
+        // Image Popup Modal Lightbox
+        function openImageModal(imgUrl, title, category, description) {
+            document.getElementById('modalImg').src = imgUrl;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalCategory').textContent = category;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('imageModal').classList.remove('hidden');
+        }
+
+        function closeImageModal(e) {
+            if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
+            document.getElementById('imageModal').classList.add('hidden');
+        }
+
+        // Mobile Nav Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Product Detail / Inquiry Handler
+        function openProductDetail(key) {
+            const p = productSpecs[key];
+            if (!p) return;
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('productModalContent');
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <span class="bg-amber text-slate-950 font-bold text-xs px-3 py-1 rounded-full uppercase">Technical Datasheet</span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold font-heading text-white">${p.title}</h3>
+                    
+                    <div class="space-y-3 bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs">
+                        <div class="flex justify-between border-b border-slate-800 pb-2">
+                            <span class="text-slate-400">Particle Size:</span>
+                            <span class="font-bold text-white">${p.size}</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-800 pb-2">
+                            <span class="text-slate-400">Bulk Density:</span>
+                            <span class="font-bold text-white">${p.density}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Quality Standard:</span>
+                            <span class="font-bold text-emerald-400">${p.compliance}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-300 uppercase mb-1">Recommended Applications</h4>
+                        <p class="text-slate-400 text-xs leading-relaxed">${p.uses}</p>
+                    </div>
+
+                    <div class="flex gap-3 pt-2">
+                        <button onclick="closeProductModal(); openQuoteModal('${p.title.replace(/'/g, "\\'")}');" class="flex-1 py-3 bg-amber hover:bg-amber-light text-slate-950 font-bold rounded-xl text-xs sm:text-sm transition-all">
+                            Request Quote for ${p.title}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // Gallery Filtering
+        function filterGallery(category, evt) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.gallery-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-amber', 'text-slate-950');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            if (evt && evt.target) {
+                evt.target.classList.remove('bg-slate-800', 'text-slate-300');
+                evt.target.classList.add('bg-amber', 'text-slate-950');
+            }
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Modal Controls
+        function openQuoteModal(materialName) {
+            if (materialName) {
+                const selectEl = document.getElementById('modalMaterial');
+                if (selectEl) {
+                    for (let i = 0; i < selectEl.options.length; i++) {
+                        if (selectEl.options[i].value === materialName || selectEl.options[i].text === materialName || selectEl.options[i].text.includes(materialName)) {
+                            selectEl.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            }
+            document.getElementById('quoteModal').classList.remove('hidden');
+        }
+
+        function closeQuoteModal() { 
+            document.getElementById('quoteModal').classList.add('hidden'); 
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('bulkName')?.value || '';
+            const phone = document.getElementById('bulkPhone')?.value || '';
+            const location = document.getElementById('bulkLocation')?.value || '';
+            
+            showToast('Quotation Request Submitted!');
+            
+            // Redirect to WhatsApp with filled details
+            const text = encodeURIComponent(`Hello Sahebrao Stone,\nI would like to request a bulk quote.\nName: ${name}\nPhone: ${phone}\nDelivery Address / Location: ${location}`);
+            window.open(`https://wa.me/8010639449?text=${text}`, '_blank');
+            
+            e.target.reset();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => { toast.classList.add('hidden'); }, 4000);
+        }
+
+        // Run init on DOM Ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+
+</body>
+</html>
