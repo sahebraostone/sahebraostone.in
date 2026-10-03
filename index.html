@@ -531,7 +531,7 @@
                             </div>
                             <div>
                                 <h4 class="text-slate-900 font-bold text-sm sm:text-base">Crusher Plant Location</h4>
-                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Sahebrao Stone Udyog, Gate no 557, Lonikand, <br />Tal-Haveli, Dist-Pune - 412216</p>
+                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Sahebrao Stone Udyog, <br /> Gat No. 557, Lonikand, <br />Tal-Haveli, Dist-Pune <br /> Pin - 412216</p>
                             </div>
                         </div>
 
@@ -1020,25 +1020,25 @@
                 return;
             }
 
-            const recipients = [
-                "919876543210",
-                "919876543211",
-                "919876543212"
-            ];
-            showToast('Quotation Request Submitted!');
-            recipients.forEach((phone, index) => {
-                const text = encodeURIComponent(`Hello Sahebrao Stone,\n\nI would like to request a bulk quotation for stone/aggregate delivery.\n\nCustomer Name: ${name}\nPhone: ${phone}\nRequired Material: ${material}\nQuantity: ${quantity}\nDelivery Location: ${address}\n\nPlease share your rates per metric ton and delivery charges.\n\nThank you!`);
-                setTimeout(() => {
-                    window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
-                }, index * 1500);
-            });
+            // const recipients = [
+            //     "919876543210",
+            //     "919876543211",
+            //     "919876543212"
+            // ];
+            // showToast('Quotation Request Submitted!');
+            // recipients.forEach((phone, index) => {
+            //     const text = encodeURIComponent(`Hello Sahebrao Stone,\n\nI would like to request a bulk quotation for stone/aggregate delivery.\n\nCustomer Name: ${name}\nPhone: ${phone}\nRequired Material: ${material}\nQuantity: ${quantity}\nDelivery Location: ${address}\n\nPlease share your rates per metric ton and delivery charges.\n\nThank you!`);
+            //     setTimeout(() => {
+            //         window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
+            //     }, index * 1500);
+            // });
             
             // showToast('Quotation Request Submitted!');
             
             // // Redirect to WhatsApp with filled details if password matches
-            // const text = encodeURIComponent(`Hello Sahebrao Stone,\n\nI would like to request a bulk quotation for stone/aggregate delivery.\n\nCustomer Name: ${name}\nPhone: ${phone}\nRequired Material: ${material}\nQuantity: ${quantity}\nDelivery Location: ${address}\n\nPlease share your rates per metric ton and delivery charges.\n\nThank you!`);
-            // window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
-            // // window.open(`https://wa.me/8530141243?text=${text}`, '_blank');
+            const text = encodeURIComponent(`Hello Sahebrao Stone,\n\nI would like to request a bulk quotation for stone/aggregate delivery.\n\nCustomer Name: ${name}\nPhone: ${phone}\nRequired Material: ${material}\nQuantity: ${quantity}\nDelivery Location: ${address}\n\nPlease share your rates per metric ton and delivery charges.\n\nThank you!`);
+            window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
+            // window.open(`https://wa.me/8530141243?text=${text}`, '_blank');
             
             e.target.reset();
         }
