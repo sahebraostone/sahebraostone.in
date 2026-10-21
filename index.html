@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- jsPDF for Report Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -70,7 +73,7 @@
 <body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-amber selection:text-slate-900 custom-scrollbar">
 
     <!-- Top Announcement / Quick Contact Bar -->
-    <div class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 hidden lg:block">
+    <div id="announcementBar" class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 hidden lg:block">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-6">
                 <span><i class="fa-solid fa-location-dot text-amber mr-2"></i>Serving Major Highway & Infra Projects Nationwide</span>
@@ -79,7 +82,7 @@
             <div class="flex items-center space-x-6">
                 <a href="https://wa.me/918010639449?text=Hello%20Sahebrao%20Stone,%20I%20have%20an%20inquiry." target="_blank" class="hover:text-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp text-emerald-500 mr-2"></i>+91 8010639449</a>
                 <a href="tel:+918010639449" class="hover:text-amber transition-colors"><i class="fa-solid fa-phone text-amber mr-2"></i>+91 8010639449</a>
-                <a href="mailto:sahebraostone@gmail.com" class="hover:text-amber transition-colors"><i class="fa-solid fa-envelope text-amber mr-2"></i>sahebraostone@gmail.com</a>
+                <a href="mailto:sales@sahebraostone.in" class="hover:text-amber transition-colors"><i class="fa-solid fa-envelope text-amber mr-2"></i>sales@sahebraostone.in</a>
             </div>
         </div>
     </div>
@@ -114,7 +117,12 @@
                 <!-- Action Buttons & Mobile Toggle -->
                 <div class="flex items-center gap-2 sm:gap-3">
                     <div class="hidden sm:flex items-center gap-2 lg:gap-3">
-                        <button onclick="openQuoteModal()" class="px-4 py-2.5 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-bold text-sm shadow-lg shadow-amber/20 hover:shadow-amber/40 transition-all flex items-center gap-2">
+                        <div id="authNavArea">
+                            <button onclick="openSignInModal()" class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-sm transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-right-to-bracket text-amber"></i> Sign In
+                            </button>
+                        </div>
+                        <button id="getQuoteHeaderBtn" onclick="openQuoteModal()" class="px-4 py-2.5 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-bold text-sm shadow-lg shadow-amber/20 hover:shadow-amber/40 transition-all flex items-center gap-2">
                             <i class="fa-solid fa-file-invoice"></i> Get Quote
                         </button>
                     </div>
@@ -129,14 +137,19 @@
 
         <!-- Mobile Menu Dropdown -->
         <div class="xl:hidden hidden border-b border-slate-800 bg-slate-900 px-4 pt-2 pb-6 space-y-2 shadow-2xl" id="mobileMenu">
-            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Home</a>
-            <a href="#products" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Products</a>
-            <a href="#why-us" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Why Choose Us</a>
-            <a href="#facility" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Gallery</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Contact Us</a>
+            <div id="mobileNavLinks" class="space-y-2">
+                <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Home</a>
+                <a href="#products" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Products</a>
+                <a href="#why-us" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Why Choose Us</a>
+                <a href="#facility" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Gallery</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-amber transition-colors">Contact Us</a>
+            </div>
             
-            <div class="pt-4 flex flex-col gap-2">
-                <button onclick="toggleMobileMenu(); openQuoteModal()" class="w-full text-center py-3 rounded-xl bg-amber text-slate-950 font-bold text-base shadow-lg hover:bg-amber-light transition-all flex items-center justify-center gap-2">
+            <div class="pt-4 flex flex-col gap-2" id="mobileAuthArea">
+                <button onclick="toggleMobileMenu(); openSignInModal()" class="w-full text-center py-3 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 hover:text-white font-bold text-base transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket text-amber"></i> Sign In
+                </button>
+                <button id="mobileGetQuoteBtn" onclick="toggleMobileMenu(); openQuoteModal()" class="w-full text-center py-3 rounded-xl bg-amber text-slate-950 font-bold text-base shadow-lg hover:bg-amber-light transition-all flex items-center justify-center gap-2">
                     <i class="fa-solid fa-file-invoice"></i> Get Instant Quote
                 </button>
                 <a href="https://wa.me/918010639449?text=Hello%20Sahebrao%20Stone,%20I%20am%20interested%20in%20a%20quotation." target="_blank" class="w-full text-center py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base flex items-center justify-center gap-2 transition-all">
@@ -146,502 +159,649 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative hero-pattern text-white pt-10 pb-16 lg:pt-20 lg:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex justify-center">
-            
-            <div class="max-w-4xl text-center space-y-5 sm:space-y-6 flex flex-col items-center">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/90 border border-amber/30 text-amber text-xs font-semibold tracking-wide uppercase">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    ISO Certified High-Grade Aggregates
-                </div>
+    <!-- PUBLIC WEBSITE CONTENT WRAPPER -->
+    <div id="publicSiteContent">
+        <!-- Hero Section -->
+        <section id="home" class="relative hero-pattern text-white pt-10 pb-16 lg:pt-20 lg:pb-32 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex justify-center">
                 
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-white tracking-tight leading-[1.15]">
-                    Quality Aggregates. <br class="hidden sm:inline"/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber via-amber-light to-yellow-200">Unmatched Reliability.</span><br/>
-                    Built for Infrastructure.
-                </h1>
-
-                <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed font-normal">
-                    Premier manufacturer and bulk supplier of high-grade Crushand, 6 MM, 10 MM, 20 MM, 40 MM and Granular Sub-Base (GSB) for road highways, high-rises, bridge construction, and commercial developments.
-                </p>
-
-                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
-                    <button onclick="openQuoteModal()" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-amber/20 hover:shadow-amber/40 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-file-invoice text-base sm:text-lg"></i> Get Instant Quote
-                    </button>
-                    <a href="https://wa.me/918010639449?text=Hello%20Sahebrao%20Stone,%20I%20want%20to%20inquire%20about%20material%20rates." target="_blank" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-900/30 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i> WhatsApp Us
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="py-16 sm:py-20 bg-slate-100 text-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-50 rounded-full border border-amber-200 inline-block mb-3">High Performance Aggregates</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Our Premium Product Line</h2>
-                <p class="text-slate-600 mt-3 text-sm sm:text-base">Engineered, double-washed, and precision-graded stone products manufactured to exceed Indian Standard (IS) specifications for structural and infrastructure works.</p>
-            </div>
-
-            <!-- Product Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                
-                <!-- Crushand -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
-                        <img src="./crushed.webp" alt="Crushand" class="absolute inset-0 w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-amber-600/40 mix-blend-multiply z-10"></div>
-                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-                        <div class="z-20 p-6 pt-0">
-                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">Crushand</h3>
-                            <p class="text-slate-200 text-xs mt-1">Particle Size: 0mm to 4.75mm</p>
-                        </div>
+                <div class="max-w-4xl text-center space-y-5 sm:space-y-6 flex flex-col items-center">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/90 border border-amber/30 text-amber text-xs font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        ISO Certified High-Grade Aggregates
                     </div>
-                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            High-quality VSI Crushand cubical manufactured sand, double-washed to eliminate silt content for superior workability, high bonding strength, and flawless mortar plastering.
-                        </p>
-                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Primary Application:</span>
-                                <span class="font-bold text-slate-900 text-right">RCC Concrete, Plastering</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Silt Content:</span>
-                                <span class="font-bold text-slate-900">&lt; 3% (IS 383)</span>
-                            </div>
-                        </div>
-                        <button onclick="openProductDetail('msand')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
-                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
+                    
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-white tracking-tight leading-[1.15]">
+                        Quality Aggregates. <br class="hidden sm:inline"/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber via-amber-light to-yellow-200">Unmatched Reliability.</span><br/>
+                        Built for Infrastructure.
+                    </h1>
 
-                <!-- 6 MM -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
-                        <img src="./6mm.webp" alt="6 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
-                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-                        <div class="z-20 p-6 pt-0">
-                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">6 MM</h3>
-                            <p class="text-slate-200 text-xs mt-1">Sieve Range: 6mm to 10mm</p>
-                        </div>
-                    </div>
-                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            Precision-graded fine aggregate with an exceptional shape index, ideal for dense reinforced concrete, precast elements, roofing, and asphalt surface overlays.
-                        </p>
-                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Primary Application:</span>
-                                <span class="font-bold text-slate-900 text-right">RCC Slab, Precast Works</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Crushing Value:</span>
-                                <span class="font-bold text-slate-900">&lt; 18%</span>
-                            </div>
-                        </div>
-                        <button onclick="openProductDetail('10mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
-                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 10 MM -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
-                        <img src="./10mm.webp" alt="10 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
-                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-                        <div class="z-20 p-6 pt-0">
-                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">10 MM</h3>
-                            <p class="text-slate-200 text-xs mt-1">Sieve Range: 10mm to 20mm</p>
-                        </div>
-                    </div>
-                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            High-strength standard core aggregate widely used for heavy RCC structures, columns, beams, foundation footings, and robust bridge pier construction.
-                        </p>
-                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Primary Application:</span>
-                                <span class="font-bold text-slate-900 text-right">Beams, Columns, Footings</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Specific Gravity:</span>
-                                <span class="font-bold text-slate-900">2.65 - 2.75</span>
-                            </div>
-                        </div>
-                        <button onclick="openProductDetail('20mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
-                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 20 MM -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
-                        <img src="./20mm.webp" alt="20 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
-                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-                        <div class="z-20 p-6 pt-0">
-                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">20 MM</h3>
-                            <p class="text-slate-200 text-xs mt-1">Sieve Range: 20mm to 40mm</p>
-                        </div>
-                    </div>
-                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            Coarse heavy-duty angular stone aggregate designed for mass concrete foundations, road sub-base preparation, railway ballast, and heavy industrial flooring.
-                        </p>
-                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Primary Application:</span>
-                                <span class="font-bold text-slate-900 text-right">Mass Concrete, Base Course</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Flakiness Index:</span>
-                                <span class="font-bold text-slate-900">&lt; 15%</span>
-                            </div>
-                        </div>
-                        <button onclick="openProductDetail('40mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
-                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 40 MM -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
-                        <img src="./40mm.webp" alt="40 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
-                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-                        <div class="z-20 p-6 pt-0">
-                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">40 MM</h3>
-                            <p class="text-slate-200 text-xs mt-1">Premixed Aggregate Base Course</p>
-                        </div>
-                    </div>
-                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            Dense graded Crushand aggregate engineered for road base construction, providing high load-bearing capacity and rapid highway pavement stabilization.
-                        </p>
-                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Primary Application:</span>
-                                <span class="font-bold text-slate-900 text-right">National Highways</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Compaction Efficiency:</span>
-                                <span class="font-bold text-slate-900">98% MDD</span>
-                            </div>
-                        </div>
-                        <button onclick="openProductDetail('wmm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
-                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- GSB -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
-                    <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
-                        <img src="./60mm.webp" alt="GSB" class="absolute inset-0 w-full h-full object-cover">
-                        <span class="z-20 self-start m-4 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
-                        <div class="z-20 p-6 pt-0">
-                            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">GSB</h3>
-                            <p class="text-slate-200 text-xs mt-1">Size: 150mm to 300mm+</p>
-                        </div>
-                    </div>
-                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                            Heavy-duty coarse aggregate and hard basalt stones designed for heavy fill applications, retaining walls, riverbank protection, and robust slope stabilization.
-                        </p>
-                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Primary Application:</span>
-                                <span class="font-bold text-slate-900 text-right">Retaining Walls, Riprap</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-500 font-medium">Specific Gravity:</span>
-                                <span class="font-bold text-slate-900">2.70</span>
-                            </div>
-                        </div>
-                        <button onclick="openProductDetail('boulders')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
-                            View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section id="why-us" class="py-16 sm:py-20 bg-slate-50 text-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-100/80 rounded-full border border-amber-200 inline-block mb-3">Uncompromising Standard</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Why Sahebrao Stone is the Preferred Choice</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
-                        <i class="fa-solid fa-gears"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">Precision Crushing Tech</h3>
-                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                        Equipped with high-capacity VSI (Vertical Shaft Impactor) and Jaw crushers ensuring uniform cubical shape and superior bonding in concrete mixes.
+                    <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed font-normal">
+                        Premier manufacturer and bulk supplier of high-grade Crushand stone, aggregate, M-Sand, GSB, and WMM for road highways, high-rises, bridge construction, and commercial developments.
                     </p>
-                </div>
 
-                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
-                        <i class="fa-solid fa-vial-circle-check"></i>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
+                        <button onclick="openQuoteModal()" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-amber/20 hover:shadow-amber/40 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-invoice text-base sm:text-lg"></i> Get Instant Quote
+                        </button>
+                        <a href="https://wa.me/918010639449?text=Hello%20Sahebrao%20Stone,%20I%20want%20to%20inquire%20about%20material%20rates." target="_blank" class="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-900/30 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i> WhatsApp Us
+                        </a>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">NABL Aligned Lab Testing</h3>
-                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                        Every batch undergoes strict sieve analysis, flakiness index, elongation, and aggregate impact value (AIV) testing before dispatch.
-                    </p>
                 </div>
 
-                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4 md:col-span-2 lg:col-span-1">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
-                        <i class="fa-solid fa-truck-moving"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">Dedicated Tipper Fleet</h3>
-                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                        In-house logistics fleet of 10-wheeler and 14-wheeler tippers integrated with GPS tracking to guarantee zero project downtime.
-                    </p>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Facility & Gallery Section -->
-    <section id="facility" class="py-16 sm:py-20 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
-                <div>
-                    <span class="text-amber font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber/10 rounded-full border border-amber/30 inline-block mb-3">Our Operations</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-white">Quarry & Plant Facility Gallery</h2>
-                    <p class="text-slate-400 text-xs mt-2">Hover over any image to view its title, or click to open full details in a popup box.</p>
-                </div>
-            </div>
-
-            <!-- Gallery Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+        <!-- Products Section -->
+        <section id="products" class="py-16 sm:py-20 bg-slate-100 text-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="gallery-item plant bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
-                     onclick="openImageModal('./crushed.webp', 'Crushand', 'Crushing Plant', 'Heavy-duty 500 TPH Primary Jaw Crusher breaking large basalt rocks into primary sized boulders for secondary VSI processing.')">
-                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
-                        <img src="./crushed.webp" alt="Primary Jaw Crusher" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
-                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">Crushand</h3>
-                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
-                        </div>
-                    </div>
+                <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                    <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-50 rounded-full border border-amber-200 inline-block mb-3">High Performance Aggregates</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Our Premium Product Line</h2>
+                    <p class="text-slate-600 mt-3 text-sm sm:text-base">Engineered, double-washed, and precision-graded stone products manufactured to exceed Indian Standard (IS) specifications for structural and infrastructure works.</p>
                 </div>
 
-                <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
-                     onclick="openImageModal('./6mm.webp', '6 MM', 'Stockyard', 'High-capacity stockyard maintaining over 25,000 MT of double-washed 10mm aggregate ready for high-speed automated loading.')">
-                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
-                        <img src="./6mm.webp" alt="10mm Aggregate Stockpile" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
-                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">6 MM</h3>
-                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                <!-- Product Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    
+                    <!-- Crushand -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                            <img src="./crushed.webp" alt="Crushand" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-amber-600/40 mix-blend-multiply z-10"></div>
+                            <div class="z-20 p-6 pt-0 mt-auto">
+                                <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">Crushand</h3>
+                                <p class="text-slate-200 text-xs mt-1">Particle Size: 0mm to 4.75mm</p>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                High-quality VSI Crushand cubical manufactured sand, double-washed to eliminate silt content for superior workability, high bonding strength, and flawless mortar plastering.
+                            </p>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Primary Application:</span>
+                                    <span class="font-bold text-slate-900 text-right">RCC Concrete, Plastering</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Silt Content:</span>
+                                    <span class="font-bold text-slate-900">&lt; 3% (IS 383)</span>
+                                </div>
+                            </div>
+                            <button onclick="openProductDetail('msand')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <div class="gallery-item fleet bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
-                     onclick="openImageModal('./10mm.webp', '10 MM', 'Transport Fleet', 'Our fleet of 35+ heavy-duty 10-wheeler and 14-wheeler tipper trucks equipped with real-time GPS dispatch tracking.')">
-                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
-                        <img src="./10mm.webp" alt="Heavy Tipper Fleet" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
-                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">10 MM</h3>
-                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                    <!-- 6 MM -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                            <img src="./6mm.webp" alt="6 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="z-20 p-6 pt-0 mt-auto">
+                                <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">6 MM</h3>
+                                <p class="text-slate-200 text-xs mt-1">Sieve Range: 6mm to 10mm</p>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Precision-graded fine aggregate with an exceptional shape index, ideal for dense reinforced concrete, precast elements, roofing, and asphalt surface overlays.
+                            </p>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Primary Application:</span>
+                                    <span class="font-bold text-slate-900 text-right">RCC Slab, Precast Works</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Crushing Value:</span>
+                                    <span class="font-bold text-slate-900">&lt; 18%</span>
+                                </div>
+                            </div>
+                            <button onclick="openProductDetail('10mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <div class="gallery-item plant bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
-                     onclick="openImageModal('./20mm.webp', '20 MM', 'Crushing Plant', 'Vertical Shaft Impactor (VSI) system designed to produce aggregate with a flakiness index below 12% for concrete durability.')">
-                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
-                        <img src="./20mm.webp" alt="VSI Cubical Crusher" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
-                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">20 MM</h3>
-                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                    <!-- 10 MM -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                            <img src="./10mm.webp" alt="10 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="z-20 p-6 pt-0 mt-auto">
+                                <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">10 MM</h3>
+                                <p class="text-slate-200 text-xs mt-1">Sieve Range: 10mm to 20mm</p>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                High-strength standard core aggregate widely used for heavy RCC structures, columns, beams, foundation footings, and robust bridge pier construction.
+                            </p>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Primary Application:</span>
+                                    <span class="font-bold text-slate-900 text-right">Beams, Columns, Footings</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Specific Gravity:</span>
+                                    <span class="font-bold text-slate-900">2.65 - 2.75</span>
+                                </div>
+                            </div>
+                            <button onclick="openProductDetail('20mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
-                     onclick="openImageModal('./40mm.webp', '40 MM', 'Stockyard', 'Hydro-sizer washing system ensuring micro-fine silt content is kept under 3% for superior plastering and concrete work.')">
-                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
-                        <img src="./40mm.webp" alt="M-Sand Washing Station" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
-                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">40 MM</h3>
-                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                    <!-- 20 MM -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                            <img src="./20mm.webp" alt="20 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="z-20 p-6 pt-0 mt-auto">
+                                <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">20 MM</h3>
+                                <p class="text-slate-200 text-xs mt-1">Sieve Range: 20mm to 40mm</p>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Coarse heavy-duty angular stone aggregate designed for mass concrete foundations, road sub-base preparation, railway ballast, and heavy industrial flooring.
+                            </p>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Primary Application:</span>
+                                    <span class="font-bold text-slate-900 text-right">Mass Concrete, Base Course</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Flakiness Index:</span>
+                                    <span class="font-bold text-slate-900">&lt; 15%</span>
+                                </div>
+                            </div>
+                            <button onclick="openProductDetail('40mm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
-                     onclick="openImageModal('./60mm.webp', 'GSB', 'Stockyard', 'Clean 6mm Crushand aggregate stored under dry covered bays for precise asphalt and RCC batching.')">
-                    <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
-                        <img src="./60mm.webp" alt="GSB" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
-                            <h3 class="text-lg sm:text-xl font-bold font-heading text-white">GSB</h3>
-                            <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                    <!-- 40 MM -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                            <img src="./40mm.webp" alt="40 MM Aggregate" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="z-20 p-6 pt-0 mt-auto">
+                                <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">40 MM</h3>
+                                <p class="text-slate-200 text-xs mt-1">Premixed Aggregate Base Course</p>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Dense graded Crushand aggregate engineered for road base construction, providing high load-bearing capacity and rapid highway pavement stabilization.
+                            </p>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Primary Application:</span>
+                                    <span class="font-bold text-slate-900 text-right">National Highways</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Compaction Efficiency:</span>
+                                    <span class="font-bold text-slate-900">98% MDD</span>
+                                </div>
+                            </div>
+                            <button onclick="openProductDetail('wmm')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
 
+                    <!-- GSB -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <div class="h-44 sm:h-48 bg-slate-800 relative p-0 flex flex-col justify-between overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent z-10"></div>
+                            <img src="./60mm.webp" alt="GSB" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="z-20 p-6 pt-0 mt-auto">
+                                <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">GSB</h3>
+                                <p class="text-slate-200 text-xs mt-1">Size: 150mm to 300mm+</p>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                Heavy-duty coarse aggregate and hard basalt stones designed for heavy fill applications, retaining walls, riverbank protection, and robust slope stabilization.
+                            </p>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Primary Application:</span>
+                                    <span class="font-bold text-slate-900 text-right">Retaining Walls, Riprap</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500 font-medium">Specific Gravity:</span>
+                                    <span class="font-bold text-slate-900">2.70</span>
+                                </div>
+                            </div>
+                            <button onclick="openProductDetail('boulders')" class="w-full py-2.5 rounded-xl border border-slate-300 group-hover:border-amber group-hover:bg-amber text-slate-800 group-hover:text-slate-950 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                View Specs & Inquire <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Bulk Enquiries & Quote Form Section -->
-    <section id="contact" class="py-16 sm:py-20 bg-slate-100 text-slate-900 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="py-16 sm:py-20 bg-slate-50 text-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                    <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-100/80 rounded-full border border-amber-200 inline-block mb-3">Uncompromising Standard</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Why Sahebrao Stone is the Preferred Choice</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">Precision Crushing Tech</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Equipped with high-capacity VSI (Vertical Shaft Impactor) and Jaw crushers ensuring uniform cubical shape and superior bonding in concrete mixes.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
+                            <i class="fa-solid fa-vial-circle-check"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">NABL Aligned Lab Testing</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Every batch undergoes strict sieve analysis, flakiness index, elongation, and aggregate impact value (AIV) testing before dispatch.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all space-y-4 md:col-span-2 lg:col-span-1">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber/10 rounded-2xl text-amber-dark flex items-center justify-center text-xl sm:text-2xl font-bold">
+                            <i class="fa-solid fa-truck-moving"></i>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900">Dedicated Tipper Fleet</h3>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            In-house logistics fleet of 10-wheeler and 14-wheeler tippers integrated with GPS tracking to guarantee zero project downtime.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facility & Gallery Section -->
+        <section id="facility" class="py-16 sm:py-20 bg-slate-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="lg:col-span-5 space-y-6 sm:space-y-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
                     <div>
-                        <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-50 rounded-full border border-amber-200 inline-block mb-3">Bulk Quotations</span>
-                        <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Let’s Power Your Next Project</h2>
-                        <p class="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed">
-                            Looking for reliable aggregate supply, custom gradation, or long-term contract rates? Get in touch directly with our plant dispatch team.
-                        </p>
-                    </div>
-
-                    <div class="space-y-4 sm:space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-amber-dark flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-slate-900 font-bold text-sm sm:text-base">Crusher Plant Location</h4>
-                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Sahebrao Stone Udyog, <br /> Gat No. 557, Lonikand, <br />Tal-Haveli, Dist-Pune <br /> Pin - 412216</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-emerald-600 flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
-                                <i class="fa-brands fa-whatsapp"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-slate-900 font-bold text-sm sm:text-base">WhatsApp Business</h4>
-                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5 space-y-1">
-                                    <a href="https://wa.me/918432328164?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
-                                       <span style="color: black; text-decoration: none;">Praveen Kand</span> +91 8432328164 
-                                    </a>
-                                    <a href="https://wa.me/919623296287?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
-                                        <span style="color: black; text-decoration: none;">Shashikant kand</span> +91 9623296287 
-                                    </a>
-                                    <a href="https://wa.me/918010639449?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
-                                       <span style="color: black; text-decoration: none;">Pratik kand</span> +91 8010639449 
-                                    </a>
-                                    <a href="https://wa.me/919730157933?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
-                                       <span style="color: black; text-decoration: none;">Navnath kand</span> +91 9730157933
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-amber-dark flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-slate-900 font-bold text-sm sm:text-base">Sales & Dispatch Helpline</h4>
-                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5">
-                                    <span style="color: black; text-decoration: none;">Shashikant kand</span> +91 9623296287</p>
-                            </div>
-                        </div>
+                        <span class="text-amber font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber/10 rounded-full border border-amber/30 inline-block mb-3">Our Operations</span>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-white">Quarry & Plant Facility Gallery</h2>
+                        <p class="text-slate-400 text-xs mt-2">Hover over any image to view its title, or click to open full details in a popup box.</p>
                     </div>
                 </div>
 
-                <div class="lg:col-span-7 bg-white p-5 sm:p-8 rounded-3xl border border-slate-200 shadow-xl">
-                    <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900 mb-6 flex items-center gap-2">
-                        <i class="fa-solid fa-file-signature text-amber-dark"></i> Bulk Rate Requirement Form
-                    </h3>
-
-                    <form id="bulkEnquiryForm" onsubmit="handleFormSubmit(event, 'section')" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Full Name *</label>
-                                <input type="text" id="secName" required placeholder="Enter your name" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+                    
+                    <div class="gallery-item plant bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                         onclick="openImageModal('./crushed.webp', 'Crushand', 'Crushing Plant', 'Heavy-duty 500 TPH Primary Jaw Crusher breaking large basalt rocks into primary sized boulders for secondary VSI processing.')">
+                        <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                            <img src="./crushed.webp" alt="Primary Jaw Crusher" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                                <h3 class="text-lg sm:text-xl font-bold font-heading text-white">Crushand</h3>
+                                <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
                             </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Phone Number *</label>
-                                <input type="tel" id="secPhone" required placeholder="+91 1234567890" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Required Material *</label>
-                                <select id="secMaterial" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
-                                    <option value="">Select Material</option>
-                                    <option value="Crushand">Crushand</option>
-                                    <option value="6 MM">6 MM</option>
-                                    <option value="10 MM">10 MM</option>
-                                    <option value="20 MM">20 MM</option>
-                                    <option value="40 MM">40 MM</option>
-                                    <option value="Granular Sub-Base (GSB)">Granular Sub-Base (GSB)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Approximate Quantity (MT) *</label>
-                                <input type="text" id="secQuantity" required placeholder="e.g. 100 MT" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Delivery Address *</label>
-                                <input type="text" id="secAddress" required placeholder="Site delivery address / City" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Expected Delivery Date *</label>
-                                <input type="date" id="secExpectedDate" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Send Quote To *</label>
-                                <select id="secSendQuoteTo" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
-                                    <option value="">Select Recipient</option>
-                                    <option value="8432328164">Praveen Kand</option>
-                                    <option value="9623296287">Shashikant Kand</option>
-                                    <option value="8010639449">Pratik Kand</option>
-                                    <option value="9730157933">Navnath Kand</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Admin Password *</label>
-                                <input type="password" id="secAdminPassword" required placeholder="Enter admin password" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
-                                <small class="text-slate-500 text-xs mt-1 block">This is a security measure to prevent spam. Please contact the admin for the password.</small>
-                            </div>
-                            
-
                         </div>
-                        <button type="submit" class="w-full py-3.5 sm:py-4 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-amber/20 hover:shadow-amber/40 transition-all">
-                            Submit Bulk Quotation Request
-                        </button>
-                    </form>
-                </div>
+                    </div>
 
+                    <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                         onclick="openImageModal('./6mm.webp', '6 MM', 'Stockyard', 'High-capacity stockyard maintaining over 25,000 MT of double-washed 10mm aggregate ready for high-speed automated loading.')">
+                        <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                            <img src="./6mm.webp" alt="10mm Aggregate Stockpile" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                                <h3 class="text-lg sm:text-xl font-bold font-heading text-white">6 MM</h3>
+                                <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fleet bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                         onclick="openImageModal('./10mm.webp', '10 MM', 'Transport Fleet', 'Our fleet of 35+ heavy-duty 10-wheeler and 14-wheeler tipper trucks equipped with real-time GPS dispatch tracking.')">
+                        <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                            <img src="./10mm.webp" alt="Heavy Tipper Fleet" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                                <h3 class="text-lg sm:text-xl font-bold font-heading text-white">10 MM</h3>
+                                <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item plant bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                         onclick="openImageModal('./20mm.webp', '20 MM', 'Crushing Plant', 'Vertical Shaft Impactor (VSI) system designed to produce aggregate with a flakiness index below 12% for concrete durability.')">
+                        <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                            <img src="./20mm.webp" alt="VSI Cubical Crusher" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                                <h3 class="text-lg sm:text-xl font-bold font-heading text-white">20 MM</h3>
+                                <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                         onclick="openImageModal('./40mm.webp', '40 MM', 'Stockyard', 'Hydro-sizer washing system ensuring micro-fine silt content is kept under 3% for superior plastering and concrete work.')">
+                        <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                            <img src="./40mm.webp" alt="M-Sand Washing Station" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                                <h3 class="text-lg sm:text-xl font-bold font-heading text-white">40 MM</h3>
+                                <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item stockyard bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden group cursor-pointer relative shadow-lg"
+                         onclick="openImageModal('./60mm.webp', 'GSB', 'Stockyard', 'Clean 6mm Crushand aggregate stored under dry covered bays for precise asphalt and RCC batching.')">
+                        <div class="h-56 sm:h-64 relative overflow-hidden bg-slate-950">
+                            <img src="./60mm.webp" alt="GSB" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 p-6 flex flex-col justify-end">
+                                <h3 class="text-lg sm:text-xl font-bold font-heading text-white">GSB</h3>
+                                <p class="text-slate-300 text-xs mt-1 flex items-center gap-1"><i class="fa-solid fa-expand text-amber text-xs"></i> Click to view full details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Bulk Enquiries & Quote Form Section -->
+        <section id="contact" class="py-16 sm:py-20 bg-slate-100 text-slate-900 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    
+                    <div class="lg:col-span-5 space-y-6 sm:space-y-8">
+                        <div>
+                            <span class="text-amber-dark font-extrabold uppercase tracking-widest text-xs px-3 py-1 bg-amber-50 rounded-full border border-amber-200 inline-block mb-3">Bulk Quotations</span>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-slate-900">Let’s Power Your Next Project</h2>
+                            <p class="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed">
+                                Looking for reliable aggregate supply, custom gradation, or long-term contract rates? Get in touch directly with our plant dispatch team.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 sm:space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-amber-dark flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-bold text-sm sm:text-base">Crusher Plant Location</h4>
+                                    <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Sahebrao Stone Udyog, <br /> Gat No. 557, Lonikand, <br />Tal-Haveli, Dist-Pune <br /> Pin - 412216</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-emerald-600 flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-bold text-sm sm:text-base">WhatsApp Business</h4>
+                                    <p class="text-slate-600 text-xs sm:text-sm mt-0.5 space-y-1">
+                                        <a href="https://wa.me/918432328164?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                           <span style="color: black; text-decoration: none;">Praveen Kand</span> +91 8432328164 
+                                        </a>
+                                        <a href="https://wa.me/919623296287?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                            <span style="color: black; text-decoration: none;">Shashikant kand</span> +91 9623296287 
+                                        </a>
+                                        <a href="https://wa.me/918010639449?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                           <span style="color: black; text-decoration: none;">Pratik kand</span> +91 8010639449 
+                                        </a>
+                                        <a href="https://wa.me/919730157933?text=Hello%20Sahebrao%20Stone,%20I%20have%20a%20project%20enquiry." target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1.5 font-medium">
+                                           <span style="color: black; text-decoration: none;">Navnath kand</span> +91 9730157933
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-amber-dark flex items-center justify-center text-lg sm:text-xl shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-slate-900 font-bold text-sm sm:text-base">Sales & Dispatch Helpline</h4>
+                                    <p class="text-slate-600 text-xs sm:text-sm mt-0.5">
+                                        <span style="color: black; text-decoration: none;">Shashikant kand</span> +91 9623296287</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 bg-white p-5 sm:p-8 rounded-3xl border border-slate-200 shadow-xl">
+                        <h3 class="text-lg sm:text-xl font-bold font-heading text-slate-900 mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-amber-dark"></i> Bulk Rate Requirement Form
+                        </h3>
+
+                        <form id="bulkEnquiryForm" onsubmit="handleFormSubmit(event, 'section')" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Full Name *</label>
+                                    <input type="text" id="secName" required placeholder="Enter your name" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Phone Number *</label>
+                                    <input type="tel" id="secPhone" required placeholder="+91 1234567890" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Required Material *</label>
+                                    <select id="secMaterial" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                        <option value="">Select Material</option>
+                                        <option value="Crushand">Crushand</option>
+                                        <option value="6 MM">6 MM</option>
+                                        <option value="10 MM">10 MM</option>
+                                        <option value="20 MM">20 MM</option>
+                                        <option value="40 MM">40 MM</option>
+                                        <option value="Granular Sub-Base (GSB)">Granular Sub-Base (GSB)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Approximate Quantity (MT) *</label>
+                                    <input type="text" id="secQuantity" required placeholder="e.g. 100 MT" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Delivery Address *</label>
+                                    <input type="text" id="secAddress" required placeholder="Site delivery address / City" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Expected Delivery Date *</label>
+                                    <input type="date" id="secExpectedDate" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Send Quote To *</label>
+                                    <select id="secSendQuoteTo" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                        <option value="">Select Recipient</option>
+                                        <option value="8432328164">Praveen Kand</option>
+                                        <option value="9623296287">Shashikant Kand</option>
+                                        <option value="8010639449">Pratik Kand</option>
+                                        <option value="9730157933">Navnath Kand</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Admin Password *</label>
+                                    <input type="password" id="secAdminPassword" required placeholder="Enter admin password" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 text-sm focus:border-amber focus:ring-1 focus:ring-amber outline-none">
+                                    <small class="text-slate-500 text-xs mt-1 block">This is a security measure to prevent spam. Please contact the admin for the password.</small>
+                                </div>
+                                
+
+                            </div>
+                            <button type="submit" class="w-full py-3.5 sm:py-4 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-extrabold text-sm sm:text-base shadow-lg shadow-amber/20 hover:shadow-amber/40 transition-all">
+                                Submit Bulk Quotation Request
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- DASHBOARD SECTION (Hidden by default until signed in) -->
+    <div id="dashboardSection" class="hidden min-h-[calc(100vh-80px)] bg-slate-950 text-white flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0">
+            <div class="p-6 border-b border-slate-800">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Logged In As</span>
+                <span id="sidebarUsername" class="text-amber font-bold text-base font-heading">Admin User</span>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <button onclick="switchDashboardTab('vehicles')" id="navTabVehicles" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-amber text-slate-950 shadow-lg shadow-amber/10 transition-all">
+                    <i class="fa-solid fa-truck text-lg"></i> Vehicles Management
+                </button>
+                <button onclick="switchDashboardTab('reports')" id="navTabReports" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
+                    <i class="fa-solid fa-chart-line text-lg text-amber"></i> Reports & PDFs
+                </button>
+            </nav>
+            <div class="p-4 border-t border-slate-800">
+                <button onclick="handleSignOut()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-rose-600/20 border border-rose-500/30 hover:bg-rose-600 text-rose-300 hover:text-white font-bold text-sm transition-all">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Viewport -->
+        <main class="flex-1 p-6 sm:p-10 overflow-y-auto">
+            
+            <!-- VEHICLES TAB CONTENT -->
+            <div id="tabContentVehicles" class="space-y-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">Vehicles Operations</h2>
+                        <p class="text-slate-400 text-xs sm:text-sm mt-1">Manage dispatch entries, party associations, tonnage, and operation dates.</p>
+                    </div>
+                    <button onclick="openVehicleModal('create')" class="px-5 py-2.5 bg-amber hover:bg-amber-light text-slate-950 font-bold rounded-xl text-sm shadow-lg shadow-amber/20 transition-all flex items-center gap-2 shrink-0">
+                        <i class="fa-solid fa-plus"></i> Add New Record
+                    </button>
+                </div>
+
+                <!-- Vehicles Table Card -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-950 border-b border-slate-800 text-xs text-slate-400 uppercase tracking-wider font-semibold">
+                                    <th class="p-4 sm:p-5">ID</th>
+                                    <th class="p-4 sm:p-5">Party Name</th>
+                                    <th class="p-4 sm:p-5">Vehicle Number</th>
+                                    <th class="p-4 sm:p-5">Operation Date</th>
+                                    <th class="p-4 sm:p-5">Tonnage (MT)</th>
+                                    <th class="p-4 sm:p-5 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehiclesTableBody" class="divide-y divide-slate-800 text-xs sm:text-sm text-slate-300">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REPORTS TAB CONTENT -->
+            <div id="tabContentReports" class="space-y-8 hidden">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">Reports Generator</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">Generate official daily reports, vehicle-specific date range reports, or general date range summary reports with downloadable PDF export.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Report 1: Daily Report -->
+                    <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl space-y-6 shadow-xl flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <span class="bg-amber/10 text-amber border border-amber/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block">Report Option 1</span>
+                            <h3 class="text-xl font-bold font-heading text-white">Daily Report (Single Date)</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed">Generates a complete list of operation records for a specific calendar day and downloads as <code class="bg-slate-950 px-2 py-0.5 rounded text-amber font-mono">SB_DD-MM-YYYY.pdf</code>.</p>
+                        </div>
+                        <form onsubmit="generateDailyReport(event)" class="space-y-4 pt-4 border-t border-slate-800">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Select Date *</label>
+                                <input type="date" id="dailyReportDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                            </div>
+                            <button type="submit" class="w-full py-3.5 bg-amber hover:bg-amber-light text-slate-950 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-file-pdf text-base"></i> Generate & Download PDF
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Report 2: Date Range for Particular Vehicle -->
+                    <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl space-y-6 shadow-xl flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <span class="bg-amber/10 text-amber border border-amber/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block">Report Option 2</span>
+                            <h3 class="text-xl font-bold font-heading text-white">Vehicle Date Range Report</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed">Generates records filtered by vehicle number across a date range. Downloads as <code class="bg-slate-950 px-2 py-0.5 rounded text-amber font-mono">SB_vehicle_From-Date_To-Date.pdf</code>.</p>
+                        </div>
+                        <form onsubmit="generateVehicleRangeReport(event)" class="space-y-4 pt-4 border-t border-slate-800">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Vehicle Number *</label>
+                                <select id="rangeReportVehicle" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                                    <option value="">Select Vehicle</option>
+                                    <option value="MH-12-AB-1234">MH-12-AB-1234 (10-Wheeler Tipper)</option>
+                                    <option value="MH-14-XY-5678">MH-14-XY-5678 (14-Wheeler Tipper)</option>
+                                    <option value="MH-12-PQ-9988">MH-12-PQ-9988 (10-Wheeler Tipper)</option>
+                                    <option value="MH-16-ZZ-4321">MH-16-ZZ-4321 (Hiwa Tipper)</option>
+                                    <option value="MH-14-MN-1122">MH-14-MN-1122 (Heavy Tipper)</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Start Date *</label>
+                                    <input type="date" id="rangeStartDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">End Date *</label>
+                                    <input type="date" id="rangeEndDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full py-3.5 bg-amber hover:bg-amber-light text-slate-950 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-file-pdf text-base"></i> Generate & Download PDF
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Report 3: General Date Range Report -->
+                    <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl space-y-6 shadow-xl flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <span class="bg-amber/10 text-amber border border-amber/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block">Report Option 3</span>
+                            <h3 class="text-xl font-bold font-heading text-white">General Date Range Report</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed">Generates records across all vehicles for a selected start and end date range. Downloads as <code class="bg-slate-950 px-2 py-0.5 rounded text-amber font-mono">SB_From-DD-MM-YYYY_To-DD-MM-YYYY.pdf</code>.</p>
+                        </div>
+                        <form onsubmit="generateGeneralRangeReport(event)" class="space-y-4 pt-4 border-t border-slate-800">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Start Date *</label>
+                                    <input type="date" id="generalStartDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">End Date *</label>
+                                    <input type="date" id="generalEndDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full py-3.5 bg-amber hover:bg-amber-light text-slate-950 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-file-pdf text-base"></i> Generate & Download PDF
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-400 text-xs sm:text-sm border-t border-slate-800 py-8">
+    <footer id="mainFooter" class="bg-slate-950 text-slate-400 text-xs sm:text-sm border-t border-slate-800 py-8">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-3">
             <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
                 <a href="https://wa.me/918010639449?text=I would like to request a bulk quotation for stone/aggregate delivery." target="_blank" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
@@ -656,6 +816,108 @@
             </div>
         </div>
     </footer>
+
+    <!-- VEHICLE CREATE / EDIT MODAL -->
+    <div id="vehicleModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative text-white space-y-6">
+            <button onclick="closeVehicleModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div>
+                <h3 id="vehicleModalTitle" class="text-xl sm:text-2xl font-extrabold font-heading text-white flex items-center gap-2">
+                    <i class="fa-solid fa-truck text-amber"></i> Add Vehicle Record
+                </h3>
+                <p class="text-slate-400 text-xs mt-1">Fill in the dispatch operation details below.</p>
+            </div>
+
+            <form id="vehicleForm" onsubmit="handleVehicleFormSubmit(event)" class="space-y-4">
+                <input type="hidden" id="editVehicleIndex" value="">
+                
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">1. Party Name *</label>
+                    <select id="vehiclePartyName" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                        <option value="">Select Party Name</option>
+                        <option value="565">565</option>
+                        <option value="557">557</option>
+                        <option value="543">543</option>
+                        <option value="Guest">Guest</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">2. Vehicle Number *</label>
+                    <select id="vehicleNumber" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                        <option value="">Select Vehicle Number</option>
+                        <option value="MH-12-AB-1234">MH-12-AB-1234</option>
+                        <option value="MH-14-XY-5678">MH-14-XY-5678</option>
+                        <option value="MH-12-PQ-9988">MH-12-PQ-9988</option>
+                        <option value="MH-16-ZZ-4321">MH-16-ZZ-4321</option>
+                        <option value="MH-14-MN-1122">MH-14-MN-1122</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">3. Operation Date *</label>
+                    <input type="date" id="vehicleOperationDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">4. Tonnage (MT) *</label>
+                    <input type="text" id="vehicleTonnage" required placeholder="e.g. 25.5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:border-amber outline-none">
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-amber hover:bg-amber-light text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-amber/20">
+                    Save Vehicle Record
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl relative text-white space-y-6">
+            <button onclick="closeSignInModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div>
+                <h3 class="text-xl sm:text-2xl font-extrabold font-heading text-white flex items-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket text-amber"></i> Sign In
+                </h3>
+                <p class="text-slate-400 text-xs mt-1">Access your Sahebrao Stone portal account & dashboard.</p>
+            </div>
+
+            <form onsubmit="handleSignInSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Username *</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-500">
+                            <i class="fa-solid fa-user text-xs"></i>
+                        </span>
+                        <input type="text" id="signInUsername" required placeholder="Enter your username" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-white text-sm focus:border-amber outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Password *</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-500">
+                            <i class="fa-solid fa-lock text-xs"></i>
+                        </span>
+                        <input type="password" id="signInPassword" required placeholder="Enter your password" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-white text-sm focus:border-amber outline-none">
+                    </div>
+                </div>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" class="rounded border-slate-800 bg-slate-950 text-amber focus:ring-amber">
+                        <span>Remember me</span>
+                    </label>
+                    <!-- <a href="#" onclick="alert('Please contact admin to reset your password.'); return false;" class="hover:text-amber transition-colors">Forgot Password?</a> -->
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-amber hover:bg-amber-light text-slate-950 font-bold rounded-xl text-sm shadow-lg shadow-amber/20 hover:shadow-amber/40 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                </button>
+            </form>
+        </div>
+    </div>
 
     <!-- POPUP LIGHTBOX MODAL FOR BIG IMAGE & DESCRIPTION -->
     <div id="imageModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeImageModal(event)">
@@ -765,6 +1027,15 @@
     </div>
 
     <script>
+        // Mock Database for Vehicles CRUD
+        let vehiclesData = [
+            { id: 1, partyName: '557', vehicleNumber: 'MH-12-AB-1234', operationDate: '2026-06-01', tonnage: '24.5' },
+            { id: 2, partyName: '565', vehicleNumber: 'MH-14-XY-5678', operationDate: '2026-06-01', tonnage: '30.0' },
+            { id: 3, partyName: '543', vehicleNumber: 'MH-12-PQ-9988', operationDate: '2026-06-02', tonnage: '22.8' },
+            { id: 4, partyName: 'Guest', vehicleNumber: 'MH-16-ZZ-4321', operationDate: '2026-06-03', tonnage: '28.2' },
+            { id: 5, partyName: '557', vehicleNumber: 'MH-14-MN-1122', operationDate: '2026-06-03', tonnage: '32.1' }
+        ];
+
         // Product Specification Data Dictionary
         const productSpecs = {
             'msand': {
@@ -825,11 +1096,13 @@
                     closeImageModal();
                     closeProductModal();
                     closeQuoteModal();
+                    closeSignInModal();
+                    closeVehicleModal();
                 }
             });
 
             // Set up click-outside listeners for modal overlays
-            ['productModal', 'quoteModal'].forEach(modalId => {
+            ['productModal', 'quoteModal', 'signInModal', 'vehicleModal'].forEach(modalId => {
                 const modalEl = document.getElementById(modalId);
                 if (modalEl) {
                     modalEl.addEventListener('click', (e) => {
@@ -840,33 +1113,382 @@
                 }
             });
 
-            // Active section scroll-spy navigation highlighting
-            const sections = document.querySelectorAll('section[id]');
-            const desktopNavLinks = document.querySelectorAll('#navLinks a[href^="#"]');
+            renderVehiclesTable();
+        }
 
-            window.addEventListener('scroll', () => {
-                let currentId = '';
-                const scrollPos = window.scrollY + 120;
+        // --- AUTHENTICATION & DASHBOARD SWITCHING ---
+        let currentLoggedInUser = null;
 
-                sections.forEach(section => {
-                    const top = section.offsetTop;
-                    const height = section.offsetHeight;
-                    if (scrollPos >= top && scrollPos < top + height) {
-                        currentId = section.getAttribute('id');
-                    }
+        function openSignInModal() {
+            document.getElementById('signInModal').classList.remove('hidden');
+        }
+
+        function closeSignInModal() {
+            document.getElementById('signInModal').classList.add('hidden');
+        }
+
+        function handleSignInSubmit(e) {
+            e.preventDefault();
+            const username = document.getElementById('signInUsername')?.value.trim();
+            const password = document.getElementById('signInPassword')?.value;
+
+            if (!username || !password) {
+                alert('Please enter both username and password.');
+                return;
+            }
+
+            if (username !== 'sahebrao' || password !== '565') {
+                alert('Invalid username or password.');
+                return;
+            }
+
+            currentLoggedInUser = username;
+            showToast(`Signed in successfully as ${username}`);
+            closeSignInModal();
+            e.target.reset();
+
+            // Transition UI to Dashboard View & Hide public nav links / Get Quote buttons
+            document.getElementById('publicSiteContent').classList.add('hidden');
+            document.getElementById('announcementBar').classList.add('hidden');
+            document.getElementById('navLinks').classList.add('hidden');
+            document.getElementById('mobileNavLinks').classList.add('hidden');
+            document.getElementById('getQuoteHeaderBtn').classList.add('hidden');
+            document.getElementById('mobileGetQuoteBtn').classList.add('hidden');
+            
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            document.getElementById('sidebarUsername').textContent = username;
+
+            // Update Header Nav for signed in user
+            document.getElementById('authNavArea').innerHTML = `
+                <button onclick="openDashboard()" class="px-5 py-2.5 rounded-xl bg-amber hover:bg-amber-light text-slate-950 font-bold text-sm shadow-lg transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-gauge"></i> Dashboard
+                </button>
+            `;
+            document.getElementById('mobileAuthArea').innerHTML = `
+                <button onclick="openDashboard()" class="w-full text-center py-3 rounded-xl bg-amber text-slate-950 font-bold text-base transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-gauge"></i> Dashboard
+                </button>
+            `;
+        }
+
+        function openDashboard() {
+            document.getElementById('publicSiteContent').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+        }
+
+        function handleSignOut() {
+            currentLoggedInUser = null;
+            showToast('Signed out successfully');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('publicSiteContent').classList.remove('hidden');
+            document.getElementById('announcementBar').classList.remove('hidden');
+
+            // Restore public navigation links and Get Quote buttons
+            document.getElementById('navLinks').classList.remove('hidden');
+            document.getElementById('mobileNavLinks').classList.remove('hidden');
+            document.getElementById('getQuoteHeaderBtn').classList.remove('hidden');
+            document.getElementById('mobileGetQuoteBtn').classList.remove('hidden');
+
+            // Reset Header Nav buttons
+            document.getElementById('authNavArea').innerHTML = `
+                <button onclick="openSignInModal()" class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket text-amber"></i> Sign In
+                </button>
+            `;
+            document.getElementById('mobileAuthArea').innerHTML = `
+                <button onclick="toggleMobileMenu(); openSignInModal()" class="w-full text-center py-3 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 hover:text-white font-bold text-base transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket text-amber"></i> Sign In
+                </button>
+                <button id="mobileGetQuoteBtn" onclick="toggleMobileMenu(); openQuoteModal()" class="w-full text-center py-3 rounded-xl bg-amber text-slate-950 font-bold text-base shadow-lg hover:bg-amber-light transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-invoice"></i> Get Instant Quote
+                </button>
+                <a href="https://wa.me/918010639449?text=Hello%20Sahebrao%20Stone,%20I%20am%20interested%20in%20a%20quotation." target="_blank" class="w-full text-center py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Us (+91 8010639449)
+                </a>
+            `;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchDashboardTab(tabName) {
+            const vehiclesTab = document.getElementById('navTabVehicles');
+            const reportsTab = document.getElementById('navTabReports');
+            const vehiclesContent = document.getElementById('tabContentVehicles');
+            const reportsContent = document.getElementById('tabContentReports');
+
+            if (tabName === 'vehicles') {
+                vehiclesTab.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-amber text-slate-950 shadow-lg shadow-amber/10 transition-all";
+                reportsTab.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-all";
+                vehiclesContent.classList.remove('hidden');
+                reportsContent.classList.add('hidden');
+            } else {
+                reportsTab.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-amber text-slate-950 shadow-lg shadow-amber/10 transition-all";
+                vehiclesTab.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-all";
+                reportsContent.classList.remove('hidden');
+                vehiclesContent.classList.add('hidden');
+            }
+        }
+
+        // --- VEHICLES CRUD FUNCTIONS ---
+        function renderVehiclesTable() {
+            const tbody = document.getElementById('vehiclesTableBody');
+            if (!tbody) return;
+
+            if (vehiclesData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500">No vehicle records found. Click 'Add New Record' to begin.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = vehiclesData.map((v, index) => `
+                <tr class="hover:bg-slate-800/50 transition-colors">
+                    <td class="p-4 sm:p-5 font-mono text-xs text-amber">#${v.id}</td>
+                    <td class="p-4 sm:p-5 font-bold text-white">${v.partyName}</td>
+                    <td class="p-4 sm:p-5 font-medium">${v.vehicleNumber}</td>
+                    <td class="p-4 sm:p-5">${v.operationDate}</td>
+                    <td class="p-4 sm:p-5">${v.tonnage} MT</td>
+                    <td class="p-4 sm:p-5 text-right space-x-2">
+                        <button onclick="openVehicleModal('edit', ${index})" class="px-3 py-1.5 bg-slate-800 hover:bg-amber hover:text-slate-950 rounded-lg text-xs font-bold transition-all" title="Edit Record">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button onclick="deleteVehicleRecord(${index})" class="px-3 py-1.5 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-bold transition-all" title="Delete Record">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openVehicleModal(mode, index = null) {
+            const modal = document.getElementById('vehicleModal');
+            const titleEl = document.getElementById('vehicleModalTitle');
+            const editIndexEl = document.getElementById('editVehicleIndex');
+            
+            document.getElementById('vehicleForm').reset();
+
+            if (mode === 'edit' && index !== null) {
+                titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square text-amber"></i> Edit Vehicle Record`;
+                editIndexEl.value = index;
+                const v = vehiclesData[index];
+                document.getElementById('vehiclePartyName').value = v.partyName;
+                document.getElementById('vehicleNumber').value = v.vehicleNumber;
+                document.getElementById('vehicleOperationDate').value = v.operationDate;
+                document.getElementById('vehicleTonnage').value = v.tonnage;
+            } else {
+                titleEl.innerHTML = `<i class="fa-solid fa-truck text-amber"></i> Add Vehicle Record`;
+                editIndexEl.value = '';
+                // Set default date to today
+                const todayStr = new Date().toISOString().split('T')[0];
+                document.getElementById('vehicleOperationDate').value = todayStr;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeVehicleModal() {
+            document.getElementById('vehicleModal').classList.add('hidden');
+        }
+
+        function handleVehicleFormSubmit(e) {
+            e.preventDefault();
+            const editIndex = document.getElementById('editVehicleIndex').value;
+            const partyName = document.getElementById('vehiclePartyName').value;
+            const vehicleNumber = document.getElementById('vehicleNumber').value;
+            const operationDate = document.getElementById('vehicleOperationDate').value;
+            const tonnage = document.getElementById('vehicleTonnage').value;
+
+            if (!partyName || !vehicleNumber || !operationDate || !tonnage) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            if (editIndex !== '') {
+                // Update existing
+                const idx = parseInt(editIndex);
+                vehiclesData[idx].partyName = partyName;
+                vehiclesData[idx].vehicleNumber = vehicleNumber;
+                vehiclesData[idx].operationDate = operationDate;
+                vehiclesData[idx].tonnage = tonnage;
+                showToast('Vehicle record updated successfully!');
+            } else {
+                // Create new
+                const newId = vehiclesData.length > 0 ? Math.max(...vehiclesData.map(v => v.id)) + 1 : 1;
+                vehiclesData.push({
+                    id: newId,
+                    partyName,
+                    vehicleNumber,
+                    operationDate,
+                    tonnage
                 });
+                showToast('Vehicle record created successfully!');
+            }
 
-                desktopNavLinks.forEach(link => {
-                    const href = link.getAttribute('href').replace('#', '');
-                    if (href === currentId) {
-                        link.classList.add('text-amber', 'font-bold');
-                        link.classList.remove('text-slate-200');
-                    } else {
-                        link.classList.remove('text-amber', 'font-bold');
-                        link.classList.add('text-slate-200');
-                    }
-                });
+            closeVehicleModal();
+            renderVehiclesTable();
+        }
+
+        function deleteVehicleRecord(index) {
+            if (confirm('Are you sure you want to delete this vehicle dispatch record?')) {
+                vehiclesData.splice(index, 1);
+                showToast('Vehicle record deleted successfully.');
+                renderVehiclesTable();
+            }
+        }
+
+        // --- REPORTS GENERATION & PDF EXPORT (jsPDF) ---
+        function generateDailyReport(e) {
+            e.preventDefault();
+            const dateVal = document.getElementById('dailyReportDate').value;
+            if (!dateVal) {
+                alert('Please select a date.');
+                return;
+            }
+
+            // Filter records for the selected date
+            const filteredRecords = vehiclesData.filter(v => v.operationDate === dateVal);
+
+            // Format date for filename: DD-MM-YYYY
+            const parts = dateVal.split('-'); // YYYY-MM-DD
+            const formattedDateStr = `${parts[2]}-${parts[1]}-${parts[0]}`;
+            const pdfFilename = `SB_${formattedDateStr}.pdf`;
+
+            createPDFReport({
+                title: `Sahebrao Stone - Daily Operation Report`,
+                subtitle: `Operation Date: ${formattedDateStr}`,
+                filename: pdfFilename,
+                records: filteredRecords
             });
+        }
+
+        function generateVehicleRangeReport(e) {
+            e.preventDefault();
+            const vehicleNum = document.getElementById('rangeReportVehicle').value;
+            const startDate = document.getElementById('rangeStartDate').value;
+            const endDate = document.getElementById('rangeEndDate').value;
+
+            if (!vehicleNum || !startDate || !endDate) {
+                alert('Please select a vehicle and both start and end dates.');
+                return;
+            }
+
+            if (startDate > endDate) {
+                alert('Start date cannot be after end date.');
+                return;
+            }
+
+            // Filter records by vehicle number and date range
+            const filteredRecords = vehiclesData.filter(v => {
+                return v.vehicleNumber === vehicleNum && v.operationDate >= startDate && v.operationDate <= endDate;
+            });
+
+            // Format dates for filename: DD-MM-YYYY
+            const fmtStart = startDate.split('-').reverse().join('-');
+            const fmtEnd = endDate.split('-').reverse().join('-');
+            const pdfFilename = `SB_${vehicleNum}_From-${fmtStart}_To-${fmtEnd}.pdf`;
+
+            createPDFReport({
+                title: `Sahebrao Stone - Vehicle Activity Report`,
+                subtitle: `Vehicle: ${vehicleNum} | Period: ${fmtStart} to ${fmtEnd}`,
+                filename: pdfFilename,
+                records: filteredRecords
+            });
+        }
+
+        function generateGeneralRangeReport(e) {
+            e.preventDefault();
+            const startDate = document.getElementById('generalStartDate').value;
+            const endDate = document.getElementById('generalEndDate').value;
+
+            if (!startDate || !endDate) {
+                alert('Please select both start and end dates.');
+                return;
+            }
+
+            if (startDate > endDate) {
+                alert('Start date cannot be after end date.');
+                return;
+            }
+
+            // Filter records across all vehicles by date range
+            const filteredRecords = vehiclesData.filter(v => {
+                return v.operationDate >= startDate && v.operationDate <= endDate;
+            });
+
+            // Format dates for filename: DD-MM-YYYY
+            const fmtStart = startDate.split('-').reverse().join('-');
+            const fmtEnd = endDate.split('-').reverse().join('-');
+            const pdfFilename = `SB_From-${fmtStart}_To-${fmtEnd}.pdf`;
+
+            createPDFReport({
+                title: `Sahebrao Stone - Date Range Operation Report`,
+                subtitle: `Period: ${fmtStart} to ${fmtEnd}`,
+                filename: pdfFilename,
+                records: filteredRecords
+            });
+        }
+
+        function createPDFReport({ title, subtitle, filename, records }) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Header styling
+            doc.setFillColor(15, 23, 42); // slate-900
+            doc.rect(0, 0, 210, 35, 'F');
+
+            doc.setTextColor(245, 158, 11); // amber
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(18);
+            doc.text('SAHEBRAO STONE UDYOG', 14, 16);
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(10);
+            doc.text('Crusher & Aggregates | Lonikand, Pune - 412216', 14, 24);
+
+            // Report Meta
+            doc.setTextColor(30, 41, 59);
+            doc.setFontSize(14);
+            doc.text(title, 14, 48);
+
+            doc.setFontSize(10);
+            doc.setTextColor(100, 116, 139);
+            doc.text(subtitle, 14, 55);
+            doc.text(`Generated On: ${new Date().toLocaleString()}`, 14, 61);
+
+            if (records.length === 0) {
+                doc.setFontSize(12);
+                doc.setTextColor(220, 38, 38);
+                doc.text('No dispatch records found matching the specified parameters.', 14, 75);
+            } else {
+                // Table Data preparation
+                const tableColumn = ["ID", "Party Name", "Vehicle Number", "Operation Date", "Tonnage (MT)"];
+                const tableRows = records.map(r => [
+                    `#${r.id}`,
+                    r.partyName,
+                    r.vehicleNumber,
+                    r.operationDate,
+                    r.tonnage
+                ]);
+
+                doc.autoTable({
+                    startY: 70,
+                    head: [tableColumn],
+                    body: tableRows,
+                    theme: 'grid',
+                    headStyles: { fillColor: [15, 23, 42], textColor: [245, 158, 11], fontStyle: 'bold' },
+                    styles: { fontSize: 9, cellPadding: 5 }
+                });
+
+                // Calculate Total Tonnage
+                const totalTonnage = records.reduce((sum, r) => sum + parseFloat(r.tonnage || 0), 0).toFixed(2);
+                const finalY = doc.lastAutoTable.finalY + 10;
+                
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.setTextColor(15, 23, 42);
+                doc.text(`Total Dispatched Tonnage: ${totalTonnage} MT (${records.length} Records)`, 14, finalY);
+            }
+
+            // Save PDF
+            doc.save(filename);
+            showToast(`PDF Generated: ${filename}`);
         }
 
         // Image Popup Modal Lightbox
@@ -957,48 +1579,10 @@
             document.getElementById('quoteModal').classList.add('hidden'); 
         }
 
-        // function handleFormSubmit(e, formType) {
-        //     e.preventDefault();
-            
-        //     let name, phone, material, quantity, address, adminPassword, sendQuoteTo;
-
-        //     if (formType === 'section') {
-        //         name = document.getElementById('secName')?.value.trim() || '';
-        //         phone = document.getElementById('secPhone')?.value.trim() || '';
-        //         material = document.getElementById('secMaterial')?.value.trim() || '';
-        //         quantity = document.getElementById('secQuantity')?.value.trim() || '';
-        //         address = document.getElementById('secAddress')?.value.trim() || '';
-        //         adminPassword = document.getElementById('secAdminPassword')?.value.trim() || '';
-        //         sendQuoteTo = document.getElementById('secSendQuoteTo')?.value || '8010639449';
-        //     } else {
-        //         name = document.getElementById('modalName')?.value.trim() || '';
-        //         phone = document.getElementById('modalPhone')?.value.trim() || '';
-        //         material = document.getElementById('modalMaterial')?.value.trim() || '';
-        //         quantity = document.getElementById('modalQuantity')?.value.trim() || '';
-        //         address = document.getElementById('modalAddress')?.value.trim() || '';
-        //         adminPassword = document.getElementById('modalAdminPassword')?.value.trim() || '';
-        //         sendQuoteTo = document.getElementById('modalSendQuoteTo')?.value || '8010639449';
-        //     }
-
-        //     // Check if any mandatory input field is blank
-        //     if (!name || !phone || !address || !adminPassword) {
-        //         alert('⚠️ Please fill in all mandatory fields before submitting the quote request.');
-        //         return;
-        //     }
-            
-        //     showToast('Quotation Request Submitted!');
-            
-        //     // Redirect to WhatsApp with filled details
-        //     const text = encodeURIComponent(`Hello Sahebrao Stone,\n\nI would like to request a bulk quotation for stone/aggregate delivery.\n\nCustomer Name: ${name}\nPhone: ${phone}\nRequired Material: ${material}\nQuantity: ${quantity}\nDelivery Location: ${address}\n\nPlease share your rates per metric ton and delivery charges.\n\nThank you!`);
-        //     window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
-            
-        //     e.target.reset();
-        // }
-
         function handleFormSubmit(e, formType) {
             e.preventDefault();
             
-            let name, phone, material, quantity, address, adminPassword, sendQuoteTo;
+            let name, phone, material, quantity, address, adminPassword, sendQuoteTo, expectedDateInput;
 
             if (formType === 'section') {
                 name = document.getElementById('secName')?.value.trim() || '';
@@ -1031,23 +1615,6 @@
                 alert('❌ Incorrect Admin Password! Please contact the admin for the password.');
                 return;
             }
-
-            // const recipients = [
-            //     "919876543210",
-            //     "919876543211",
-            //     "919876543212"
-            // ];
-            // showToast('Quotation Request Submitted!');
-            // recipients.forEach((phone, index) => {
-            //     const text = encodeURIComponent(`Hello Sahebrao Stone,\n\nI would like to request a bulk quotation for stone/aggregate delivery.\n\nCustomer Name: ${name}\nPhone: ${phone}\nRequired Material: ${material}\nQuantity: ${quantity}\nDelivery Location: ${address}\n\nPlease share your rates per metric ton and delivery charges.\n\nThank you!`);
-            //     setTimeout(() => {
-            //         window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
-            //     }, index * 1500);
-            // });
-            
-            // showToast('Quotation Request Submitted!');
-            
-            // // Redirect to WhatsApp with filled details if password matches
 
             // Get Current System Date formatted as DD/MM/YYYY
             const today = new Date();
@@ -1082,10 +1649,6 @@
                 `Thank you!`;
             const text = encodeURIComponent(messageText);
             window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
-
-            // // const text = encodeURIComponent(`Hello Sahebrao Stone,\n\nI would like to request a bulk quotation for stone/aggregate delivery.\n\nCustomer Name: ${name}\nPhone: ${phone}\nRequired Material: ${material}\nQuantity: ${quantity}\nDelivery Location: ${address}\n\nPlease share your rates per metric ton and delivery charges.\n\nThank you!`);
-            // window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
-            // window.open(`https://wa.me/8530141243?text=${text}`, '_blank');
             
             e.target.reset();
         }
