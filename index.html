@@ -1634,10 +1634,8 @@
             }
             
             const messageText = 
-                `Hello Sahebrao Stone,\n\n` +
-                `I would like to request a bulk quotation for stone/aggregate delivery.\n\n` +
-                `📋 Details & Information Report\n` +
-                `----------------------------------------\n` +
+                `📋 Order Details\n` +
+                `-----------------------------------\n` +
                 `• Customer Name: ${name}\n` +
                 `• Phone: ${phone}\n` +
                 `• Required Material: ${material}\n` +
@@ -1645,9 +1643,7 @@
                 `• Delivery Location: ${address}\n` +
                 `• Order Date: ${orderDateFormatted}\n` +
                 `• Expected Delivery Date: ${expectedDateFormatted}\n` +
-                `----------------------------------------\n\n` +
-                `Please share your rates per metric ton and delivery charges.\n\n` +
-                `Thank you!`;
+                `-----------------------------------\n\n`;
             const text = encodeURIComponent(messageText);
             window.open(`https://wa.me/91${sendQuoteTo}?text=${text}`, '_blank');
             
